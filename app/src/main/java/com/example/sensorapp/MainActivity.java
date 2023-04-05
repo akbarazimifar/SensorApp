@@ -17,6 +17,9 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import org.osmdroid.api.IMapController;
@@ -41,9 +44,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         Configuration.getInstance()
                 .load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
+
         setContentView(R.layout.activity_main);
 
         initLocation();
+
+
+
 
         map = (MapView) findViewById(R.id.map);
 
@@ -57,6 +64,27 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_settings) {
+            Log.d("menu", "settings");
+            return true;
+        } else if (itemId == R.id.action_home) {
+            Log.d("menu", "home");
+            return true;
+        } else if (itemId == R.id.action_search) {
+            Log.d("menu", "search");
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     protected void onStart(){
